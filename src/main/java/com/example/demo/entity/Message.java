@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.example.demo.entity;
 
 /**
  * Created by mezzsy on 2019-08-16
