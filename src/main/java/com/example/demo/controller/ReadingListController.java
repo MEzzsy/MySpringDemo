@@ -4,6 +4,7 @@ import com.example.demo.entity.Book;
 import com.example.demo.log.MyLog;
 import com.example.demo.repository.ReadingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +20,12 @@ import java.util.List;
 @RestController//组件扫描会自动将其注册为Spring应用程序上下文里的一个Bean
 //@Controller//使用Controller出现404，无法访问，这里换成RestController
 @RequestMapping("/book")//将处理器的方法映射到/book找个路径上
+@ConfigurationProperties(prefix = "zzsy")//属性注入
 public class ReadingListController {
     private static final String TAG = "ReadingListController";
     private ReadingListRepository mReadingListRepository;
+
+    private String word;
 
     @Autowired
     public ReadingListController(ReadingListRepository readingListRepository) {
@@ -31,6 +35,11 @@ public class ReadingListController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
         return "Book Demo";
+    }
+
+    @RequestMapping(value = "/say", method = RequestMethod.GET)
+    public String say() {
+        return "zzsy say " + word;
     }
 
     @RequestMapping(value = "/findall", method = RequestMethod.GET)
@@ -47,13 +56,22 @@ public class ReadingListController {
 
     /**
      * 这里不使用@RequestBody会无法自动根据Json数据创建Book对象
+     *
      * @param book
      * @return
      */
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addBook(@RequestBody Book book) {
-        MyLog.d(TAG,book.toString());
+        MyLog.d(TAG, book.toString());
         mReadingListRepository.save(book);
         return "添加成功";
+    }
+
+    /**
+     * 设置属性
+     * @param word
+     */
+    public void setWord(String word) {
+        this.word = word;
     }
 }
