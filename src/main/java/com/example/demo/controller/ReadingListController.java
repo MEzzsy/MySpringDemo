@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Book;
 import com.example.demo.log.MyLog;
 import com.example.demo.repository.ReadingListRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +26,10 @@ public class ReadingListController {
 
     private String word;
 
-    @Autowired
-    public ReadingListController(ReadingListRepository readingListRepository) {
-        mReadingListRepository = readingListRepository;
-    }
+//    @Autowired
+//    public ReadingListController(ReadingListRepository readingListRepository) {
+//        mReadingListRepository = readingListRepository;
+//    }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {

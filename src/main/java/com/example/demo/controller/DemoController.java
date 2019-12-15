@@ -16,12 +16,12 @@ public class DemoController {
 
     @RequestMapping(value = "/getDefaultUser", method = RequestMethod.GET)
     public User getDefaultUser() {
-        return new User("mezzsy", "123");
+        return null;
     }
 
     @RequestMapping(value = "/postUser", method = RequestMethod.POST)
     public User postUser(@RequestBody User user) {
-        return new User(user.getName() + "post", user.getNumber() + "post");
+        return null;
     }
 
 }
